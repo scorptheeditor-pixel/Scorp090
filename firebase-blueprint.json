@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "Project": {
+      "title": "Project",
+      "description": "A workspace project (chat thread) belonging to a user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The Google Auth UID of the owner." },
+        "title": { "type": "string", "description": "Title of the project." },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "createdAt", "updatedAt"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "A message within a project.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "model", "system"] },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["role", "content", "createdAt"]
+    },
+    "Generation": {
+      "title": "Generation",
+      "description": "An image generation produced for a user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "The Google Auth UID of the owner." },
+        "prompt": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "prompt", "imageUrl", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "Stores user projects."
+    },
+    "/projects/{projectId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/Message" },
+      "description": "Stores messages within a project."
+    },
+    "/generations/{generationId}": {
+      "schema": { "$ref": "#/entities/Generation" },
+      "description": "Stores generated images."
+    }
+  }
+}

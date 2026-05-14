@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-electric-blue: #00F0FF;
+  --color-dark-surface: #050505;
+}
+
+body {
+  background-color: var(--color-dark-surface);
+  background-image: radial-gradient(circle at top left, rgba(0, 240, 255, 0.1), transparent 40%),
+                    radial-gradient(circle at bottom right, rgba(0, 240, 255, 0.05), transparent 40%);
+  background-attachment: fixed;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.glass-panel {
+  @apply bg-white/5 backdrop-blur-2xl border border-white/10 shadow-2xl;
+}
+
+.glass-nav {
+  @apply bg-black/40 backdrop-blur-3xl border-white/10;
+}
